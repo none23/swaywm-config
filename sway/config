@@ -239,6 +239,12 @@ $bindsym $mod+w exec env RUST_BACKTRACE=1 swayr switch-to-urgent-or-lru-window &
 ## Navigation // Switch to the last recently used workspace ##
 # $bindsym $mod+Tab workspace back_and_forth
 
+## Resize windows
+$bindsym $mod+Left resize shrink width  10px
+$bindsym $mod+Down resize grow   height 10px
+$bindsym $mod+Up resize shrink height 10px
+$bindsym $mod+Right resize grow   width  10px
+
 #
 # Workspaces:
 #
@@ -333,43 +339,6 @@ $bindsym $mod+d focus child
 # allow to kill focused floating shell windows using Esc
 bindsym --release Escape [app_id="floating_shell" con_id=__focused__] kill
 
-# -------------------------------------------------------------------------------------------------
-# Resize Mode -------------------------------------------------------------------------------------
-set $mode_resize "\
-<span foreground='$orange'>󰉸</span>  \
-<span foreground='$offwhite'><b>Resize</b></span> \
-<span foreground='$orange'>(<b>↑ ↓ ← →</b>)</span> \
-<span foreground='$offwhite'><b>Increase Gaps</b></span> \
-<span foreground='$orange'>(<b>+</b>)</span> \
-<span foreground='$offwhite'><b>Decrease Gaps</b></span>\
-<span foreground='$orange'>(<b>-</b>)</span>"
-
-mode --pango_markup $mode_resize {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
-    $bindsym $left resize shrink width 10px
-    $bindsym $down resize grow height 10px
-    $bindsym $up resize shrink height 10px
-    $bindsym $right resize grow width 10px
-
-    $bindsym Shift+$left resize shrink width 50px
-    $bindsym Shift+$down resize grow height 50px
-    $bindsym Shift+$up resize shrink height 50px
-    $bindsym Shift+$right resize grow width 50px
-
-    ## Resize // Window Gaps // + - ##
-    $bindsym minus gaps inner current minus 5px
-    $bindsym plus gaps inner current plus 5px
-
-    # Return to default mode
-    $bindsym Return mode "default"
-    # can't use $bindsym here, otherwise escape on caps-lock won't work
-    bindsym Escape mode "default"
-}
-## Launch // Resize Mode ##
-$bindsym $mod+r mode $mode_resize
 
 # -------------------------------------------------------------------------------------------------
 # Scratchpad --------------------------------------------------------------------------------------
