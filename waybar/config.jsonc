@@ -65,10 +65,10 @@
   },
 
   "clock": {
-    "interval": 60,
-    "format": "{:%e %b %Y %H:%M}",
+    "interval": 1,
+    "format": "{:%b %e %a %H:%M:%S}",
     "tooltip": true,
-    "tooltip-format": "<big>{:%B %Y}</big>\n<tt>{calendar}</tt>",
+    "tooltip-format": "<tt>{calendar}</tt>",
     "on-click": "swaymsg exec \\$calendar"
   },
 
