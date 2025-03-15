@@ -395,7 +395,14 @@ $bindsym $mod+Shift+q mode $mode_shutdown
 
 # -------------------------------------------------------------------------------------------------
 # Screenshot --------------------------------------------------------------------------------------
-mode  screenshot {
+set $mode_screenshot "\
+<span foreground='$offwhite'> \
+  screenshot \
+  <span foreground='$orange'>(<b>o</b>)</span>outout \
+  <span foreground='$orange'>(<b>p</b>)</span>pick \
+</span>"
+
+mode --pango_markup $mode_screenshot {
     # output = currently active output
     $bindsym o mode "default", exec $screenshot_screen
 
@@ -408,4 +415,4 @@ mode  screenshot {
 }
 
 ## Launch // Screenshot Mode ##
-$bindsym $mod+Home mode screenshot
+$bindsym $mod+Home mode $mode_screenshot
