@@ -122,6 +122,9 @@ set $swappy_pipe swappy -f - -o -
 set $screenshot_screen $pipe_output | $swappy && $notify_paste
 set $screenshot_selection $pipe_selection | $swappy && $notify_paste
 
+# local whisper
+set $local_wisper $HOME/.config/sway/scripts/local-wisper.sh
+
 
 # user config
 include $HOME/.config/sway/config.d/*.conf
@@ -416,3 +419,26 @@ mode --pango_markup $mode_screenshot {
 
 ## Launch // Screenshot Mode ##
 $bindsym $mod+Home mode $mode_screenshot
+
+
+# -------------------------------------------------------------------------------------------------
+# Local Whisper -----------------------------------------------------------------------------------
+set $mode_local_wisper "\
+<span foreground='$offwhite'> \
+  local wisper \
+  <span foreground='$orange'>(<b>mod+`</b>)</span>stop \
+  <span foreground='$orange'>(<b>Enter</b>)</span>stop \
+  <span foreground='$orange'>(<b>Esc</b>)</span>cancel \
+</span>"
+
+mode --pango_markup $mode_local_wisper {
+    $bindsym $mod+grave mode "default", exec $local_wisper sway-stop
+    bindsym Return mode "default", exec $local_wisper sway-stop
+    bindsym KP_Enter mode "default", exec $local_wisper sway-stop
+
+    # Return to default mode and discard the current recording.
+    bindsym Escape mode "default", exec $local_wisper sway-cancel
+}
+
+## Launch // Local Whisper ##
+$bindsym $mod+grave exec $local_wisper sway-start, mode $mode_local_wisper
