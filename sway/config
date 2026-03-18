@@ -129,6 +129,8 @@ set $local_wisper $HOME/.config/sway/scripts/local-wisper.sh
 # user config
 include $HOME/.config/sway/config.d/*.conf
 
+seat seat0 xcursor_theme breeze-cursors 24
+
 default_border pixel 2
 hide_edge_borders smart
 gaps inner 0px
