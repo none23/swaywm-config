@@ -2,7 +2,7 @@
 set -euo pipefail
 
 LW_BIN="${LW_BIN:-$(command -v lw || true)}"
-LW_MODEL="${LW_MODEL:-small.en}"
+LW_MODEL="${LW_MODEL:-small}"
 LW_COMPUTE_TYPE="${LW_COMPUTE_TYPE:-int8}"
 LW_DEVICE="${LW_DEVICE:-cpu}"
 LW_SAMPLE_RATE="${LW_SAMPLE_RATE:-16000}"
