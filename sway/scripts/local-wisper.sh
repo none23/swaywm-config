@@ -2,9 +2,10 @@
 set -euo pipefail
 
 LW_BIN="${LW_BIN:-$(command -v lw || true)}"
-LW_MODEL="${LW_MODEL:-small}"
-LW_COMPUTE_TYPE="${LW_COMPUTE_TYPE:-int8}"
-LW_DEVICE="${LW_DEVICE:-cpu}"
+LW_BACKEND="${LW_BACKEND:-parakeet}"
+LW_MODEL="${LW_MODEL:-}"
+LW_COMPUTE_TYPE="${LW_COMPUTE_TYPE:-float16}"
+LW_DEVICE="${LW_DEVICE:-cuda}"
 LW_SAMPLE_RATE="${LW_SAMPLE_RATE:-16000}"
 LW_VAD_FILTER="${LW_VAD_FILTER:-false}"
 LW_OUTPUT_MODE="${LW_OUTPUT_MODE:-type}"
@@ -18,11 +19,18 @@ if [[ -z "${LW_BIN}" ]]; then
 fi
 
 args=(
-  --model "${LW_MODEL}"
-  --compute-type "${LW_COMPUTE_TYPE}"
+  --backend "${LW_BACKEND}"
   --device "${LW_DEVICE}"
   --sample-rate "${LW_SAMPLE_RATE}"
 )
+
+if [[ -n "${LW_MODEL}" ]]; then
+  args+=(--model "${LW_MODEL}")
+fi
+
+if [[ -n "${LW_COMPUTE_TYPE}" ]]; then
+  args+=(--compute-type "${LW_COMPUTE_TYPE}")
+fi
 
 if [[ "${LW_VAD_FILTER}" == "true" ]]; then
   args+=(--vad-filter)
