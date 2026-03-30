@@ -100,6 +100,8 @@ set $create_rofi_config '[ ! -f $HOME/.config/rofi/config.rasi ] && echo '@impor
 
 # day/night gamma adjustments
 set $wlsunset '[ -x "$(command -v wlsunset)" ] && $HOME/.config/sway/scripts/sunset.sh "on"'
+set $keyboard_layout_border '[ -x "$(command -v python3)" ] && $HOME/.config/sway/scripts/keyboard-layout-border.py --border-width 2 --border-color "#2563eb" --default-layout-index 0'
+set $keyboard_layout_border_reload 'sh -c '\''pkill -f "$HOME/.config/sway/scripts/keyboard-layout-border.py" || true; [ -x "$(command -v python3)" ] && exec "$HOME/.config/sway/scripts/keyboard-layout-border.py" --border-width 2 --border-color "#2563eb" --default-layout-index 0'\'''
 
 # daemons
 set $mako '$HOME/.config/sway/scripts/mako.sh --font "$term-font" --text-color "$text-color" --border-color "$accent-color" --background-color "$background-color" --border-size 3 --width 400 --height 200 --padding 20 --margin 20 --default-timeout 15000'
