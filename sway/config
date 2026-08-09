@@ -167,8 +167,8 @@ $bindsym $mod+Return exec $term_cwd
 $bindsym $mod+Shift+Return exec $term
 
 ## Action // Kill focused window ##
-# can't use $bindsym here, otherwise escape on caps-lock won't work
-bindsym $mod+Hyper_L kill
+# keyd maps the physical Escape key to F19, keeping it distinct from caps-lock
+bindsym $mod+F19 kill
 
 ## Launch // Open launcher ##
 # Your preferred application launcher
