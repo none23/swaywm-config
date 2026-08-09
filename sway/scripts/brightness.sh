@@ -1,25 +1,17 @@
 #!/bin/sh
 
-current_abs=$(light -Gr)
 current_rel() {
-    echo "($(light -G) + 0.5) / 1" | bc
-} 
-max=$(light -Mr)
-factor=3
-brightness_step=$((max * factor / 100 < 1 ? 1 : max * factor / 100))
+    brightnessctl --class=backlight --machine-readable |
+        awk -F, 'NR == 1 { sub(/%$/, "", $4); print $4 }'
+}
 
 case $1'' in
 '') ;;
 'down')
-    # if current value <= 3% and absolute value != 1, set brightness to absolute 1
-    if [ "$(current_rel)" -le "$factor" ] && [ "$current_abs" -gt 0 ] && [ "$current_abs" -ne 1 ]; then
-        light -rS 1
-    else
-        light -rU "$brightness_step"
-    fi
+    brightnessctl --class=backlight --quiet --min-value=1 set 3%-
     ;;
 'up')
-    light -rA "$brightness_step"
+    brightnessctl --class=backlight --quiet set +3%
     ;;
 esac
 

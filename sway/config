@@ -47,7 +47,7 @@ set $clipboard cliphist list | rofi -dmenu -font "$gui-font" -p "Select item to 
 set $clipboard-del cliphist list | rofi -dmenu -font "$gui-font" -p "Select item to delete" -lines 10 -width 35 | cliphist delete
 
 ### Lockscreen configuration
-set $locking swaylock --daemonize --color "$selection-color" --inside-color "$selection-color" --inside-clear-color "$text-color" --ring-color "$orange" --ring-clear-color "$blue" --ring-ver-color "$blue" --show-failed-attempts --fade-in 0.2 --grace 2 --effect-vignette 0.5:0.5 --effect-blur 7x5 --ignore-empty-password --screenshots --clock
+set $locking swaylock --daemonize --color "$selection-color" --inside-color "$selection-color" --inside-clear-color "$text-color" --ring-color "$orange" --ring-clear-color "$blue" --ring-ver-color "$blue" --show-failed-attempts --ignore-empty-password
 
 # bluetooth menu
 set $bluetooth $once $term_float bluetuith
@@ -63,7 +63,7 @@ set $sleep_timeout 32400
 set $sleep_delay 2
 
 set $swayidle swayidle -w \
-    timeout $idle_timeout 'light -G > /tmp/brightness && light -S 10' resume 'light -S $([ -f /tmp/brightness ] && cat /tmp/brightness || echo 100%)' \
+    timeout $idle_timeout 'brightnessctl --class=backlight --quiet --save set 10%' resume 'brightnessctl --class=backlight --quiet --restore' \
     timeout $locking_timeout 'exec $locking' \
     timeout $screen_timeout 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
